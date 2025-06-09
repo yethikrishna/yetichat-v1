@@ -127,16 +127,26 @@ Create `netlify.toml` in your root directory:
 
 ```toml
 [build]
-  command = "pnpm build"
+  command = "pnpm run build" # or "pnpm build"
   publish = "dist"
 
+[build.environment]
+  # Ensure pnpm is used by Netlify's build image
+  PNPM_VERSION = "8" # Specify your pnpm version or let Netlify use its default
+
+# Redirects rule for Single Page Applications (SPA)
+# This ensures that all paths are served by index.html
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-[build.environment]
-  NPM_FLAGS = "--prefix=/dev/null"
+# Optional: Settings for `netlify dev` local development server
+[dev]
+  command = "pnpm run dev" # Command to run the dev server
+  port = 5173              # Port for the local dev server
+  publish = "dist"         # Directory to serve locally (same as build.publish)
+  # targetPort = 3000      # If your app runs on a different port during dev
 ```
 
 ## Docker Deployment
