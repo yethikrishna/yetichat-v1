@@ -54,13 +54,38 @@ const TestBypassAuth: React.FC<TestBypassAuthProps> = ({ children }) => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-2.694-.833-3.464 0L3.35 16.5c-.77.833.192 2.5 1.732 2.5z" />
               </svg>
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Test Mode Error</h3>
-            <p className="text-sm text-gray-600">{error}</p>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Test/Bypass Authentication Setup Error</h3>
+            <p className="text-sm text-red-700 bg-red-100 p-3 rounded-md mb-4">
+              <strong>Error details:</strong> {error}
+            </p>
+            <div className="text-sm text-gray-700 space-y-2 text-left">
+              <p className="font-semibold">Troubleshooting suggestions:</p>
+              {error && (
+                <>
+                  { (error.includes('APP_ID') || error.toLowerCase().includes('app not found') || error.includes('ERR_CC_APP_NOT_FOUND')) && (
+                    <p>• Check if <code className="bg-gray-200 p-1 rounded text-xs">VITE_COMETCHAT_APP_ID</code> in your <code>.env</code> file is correct and matches the App ID in your CometChat dashboard.</p>
+                  )}
+                  { (error.includes('AUTH_KEY') || error.toLowerCase().includes('invalid credentials') || error.includes('ERR_CC_AUTH_KEY_NOT_FOUND')) && (
+                    <p>• Verify that <code className="bg-gray-200 p-1 rounded text-xs">VITE_COMETCHAT_AUTH_KEY</code> in your <code>.env</code> file is correct.</p>
+                  )}
+                  { (error.toLowerCase().includes('uid_not_found') || error.toLowerCase().includes('user not found') || error.includes('ERR_CC_UID_NOT_FOUND')) && (
+                    <p>• Ensure the test user (e.g., <code className="bg-gray-200 p-1 rounded text-xs">cometchat-uid-1</code>) exists in your CometChat dashboard for the specified region.</p>
+                  )}
+                  { (error.toLowerCase().includes('region') || error.includes('ERR_CC_REGION_NOT_FOUND')) && (
+                     <p>• Confirm that <code className="bg-gray-200 p-1 rounded text-xs">VITE_COMETCHAT_REGION</code> in your <code>.env</code> file is correct (e.g., "us", "eu", "in").</p>
+                  )}
+                </>
+              )}
+              <p>• Double-check all <code className="bg-gray-200 p-1 rounded text-xs">VITE_COMETCHAT_*</code> environment variables in your <code>.env</code> file.</p>
+              <p>• If deploying to Netlify (or another platform), ensure these environment variables are correctly set in the hosting provider's UI.</p>
+              <p>• Make sure you have run <code className="bg-gray-200 p-1 rounded text-xs">pnpm install</code> (or <code className="bg-gray-200 p-1 rounded text-xs">npm install</code>) recently.</p>
+              <p>• Consult the <code className="bg-gray-200 p-1 rounded text-xs">README.md</code> and <code className="bg-gray-200 p-1 rounded text-xs">docs/SETUP.md</code> for more details.</p>
+            </div>
             <button
               onClick={() => window.location.reload()}
-              className="mt-4 bg-red-600 text-white px-4 py-2 rounded-md text-sm hover:bg-red-700"
+              className="mt-6 bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 w-full"
             >
-              Retry
+              Retry Initialization
             </button>
           </div>
         </div>
