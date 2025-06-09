@@ -4,7 +4,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ErrorBoundary from './components/ui/ErrorBoundary';
-import TestBypassAuth from './components/auth/TestBypassAuth';
+import AuthWrapper from './components/auth/AuthWrapper'; // Import AuthWrapper
 import MainLayout from './components/layout/MainLayout';
 import './styles/globals.css';
 
@@ -13,9 +13,9 @@ function App() {
     <ErrorBoundary>
       <Router>
         <div className="App">
-          <TestBypassAuth>
+          <AuthWrapper> {/* Use AuthWrapper */}
             <MainLayout />
-          </TestBypassAuth>
+          </AuthWrapper>
         </div>
       </Router>
     </ErrorBoundary>

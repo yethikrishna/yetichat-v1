@@ -127,31 +127,48 @@ yetichat/
 - `pnpm preview` - Preview production build
 - `pnpm lint` - Run ESLint
 
-## 🔑 CometChat Setup
+## Environment Variables
 
-To use Yetichat, you need to set up a CometChat application:
+Yetichat requires API keys from CometChat to function. These keys should be stored in a `.env` file in the project root for local development.
+
+Create a `.env` file in the root of the project with the following content:
+
+```env
+VITE_COMETCHAT_APP_ID=YOUR_APP_ID
+VITE_COMETCHAT_REGION=YOUR_REGION
+VITE_COMETCHAT_AUTH_KEY=YOUR_AUTH_KEY
+VITE_COMETCHAT_REST_API_KEY=YOUR_REST_API_KEY
+```
+
+To obtain these keys:
 
 1. **Create a CometChat Account**
    - Visit [CometChat Dashboard](https://app.cometchat.com/)
-   - Sign up for a free account
+   - Sign up for a free account or log in.
 
-2. **Create a New App**
-   - Click "Add New App"
-   - Choose your preferred region
-   - Note down your App ID, Region, Auth Key, and REST API Key
+2. **Create a New App or Use an Existing One**
+   - In the CometChat Dashboard, either create a new app by clicking "Add New App" or select an existing app.
+   - Choose your preferred region when creating a new app.
 
-3. **Configure Authentication**
-   - In CometChat Dashboard, go to API & Auth Keys
-   - Copy the required keys to your `.env` file
+3. **Find Your Credentials**
+   - Navigate to the "API & Auth Keys" section for your app within the CometChat Dashboard.
+   - Note down your App ID, Region, Auth Key, and REST API Key.
 
-For detailed setup instructions, see [SETUP.md](docs/SETUP.md).
+4. **Populate your `.env` file**
+   - Copy these keys into your `.env` file, replacing the placeholders.
+
+For more detailed setup instructions, including CometChat configuration, see [SETUP.md](docs/SETUP.md).
 
 ## 🚀 Deployment
 
-Yetichat can be deployed to various platforms. See [DEPLOYMENT.md](docs/DEPLOYMENT.md) for detailed instructions on:
+This project is configured for deployment on **Netlify** via the `netlify.toml` file.
+
+For the deployed application to function correctly, the CometChat API keys (as defined in the "Environment Variables" section) **must be set in the Netlify UI** for your site. Do not commit your `.env` file with sensitive keys to your repository.
+
+See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for more detailed deployment instructions, including:
 
 - Vercel deployment
-- Netlify deployment
+- Netlify deployment (including setting environment variables in the UI)
 - Docker deployment
 - Custom server deployment
 

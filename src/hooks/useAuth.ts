@@ -115,6 +115,32 @@ export const useAuth = () => {
     
     // Utilities
     validateUID: AuthService.validateUID.bind(AuthService),
+
+    // Registration
+    register: useCallback(async (uid: string, name: string): Promise<ApiResponse<CometChat.User>> => {
+      // Client-side validation for UID
+      const uidValidation = AuthService.validateUID(uid);
+      if (!uidValidation.valid) {
+        const errorMsg = uidValidation.error || "Invalid User ID format.";
+        setAuthState(prev => ({ ...prev, error: errorMsg, isLoading: false }));
+        return { success: false, error: errorMsg };
+      }
+
+      // Client-side validation for name (e.g., not empty, reasonable length)
+      if (!name || name.trim().length === 0) {
+        const errorMsg = "Name cannot be empty.";
+        setAuthState(prev => ({ ...prev, error: errorMsg, isLoading: false }));
+        return { success: false, error: errorMsg };
+      }
+      if (name.trim().length > 100) { // Example length limit
+        const errorMsg = "Name is too long (maximum 100 characters).";
+        setAuthState(prev => ({ ...prev, error: errorMsg, isLoading: false }));
+        return { success: false, error: errorMsg };
+      }
+
+      AuthService.clearError(); // Clear any previous errors
+      return await AuthService.register(uid.trim(), name.trim());
+    }, []),
   };
 };
 

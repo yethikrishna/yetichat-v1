@@ -17,10 +17,18 @@ const Header: React.FC<HeaderProps> = ({
   onMenuToggle,
   isSidebarOpen = false 
 }) => {
-  const { user, logout } = useAuth();
+  const { user, logout, isAuthenticated } = useAuth(); // Added isAuthenticated
 
   const handleLogout = async () => {
-    await logout();
+    try {
+      await logout();
+      // Logout success will trigger AuthWrapper to re-render and show LoginForm
+      // No explicit navigation needed here.
+      console.log("Logout successful");
+    } catch (error) {
+      console.error("Logout failed:", error);
+      // Optionally, display a toast or message to the user about logout failure
+    }
   };
 
   return (
@@ -125,25 +133,27 @@ const Header: React.FC<HeaderProps> = ({
               </svg>
             </button>
 
-            {/* Logout Button */}
-            <button
-              onClick={handleLogout}
-              className="p-2 rounded-md text-gray-400 hover:text-red-500 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
-              aria-label="Logout"
-              title="Logout"
-            >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            {/* Logout Button - Conditionally rendered */}
+            {isAuthenticated && (
+              <button
+                onClick={handleLogout}
+                className="p-2 rounded-md text-gray-400 hover:text-red-500 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                aria-label="Logout"
+                title="Logout"
               >
-                <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
-            </button>
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+              </button>
+            )}
           </div>
         </div>
       </div>
