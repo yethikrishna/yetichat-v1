@@ -48,6 +48,14 @@ class CometChatService {
         .subscribePresenceForAllUsers() // Enable real-time presence updates
         .build();
 
+      const settingsForLog = {
+        appId: UIKitSettings.appId,
+        region: UIKitSettings.region,
+        authKey: UIKitSettings.authKey ? '********' : undefined, // Mask authKey
+        // Add other non-sensitive settings if needed for logging
+      };
+      console.log("CometChatService.initialize: Initializing with UIKitSettings:", settingsForLog);
+
       // Initialize the UI Kit
       await CometChatUIKit.init(UIKitSettings);
       
@@ -60,7 +68,10 @@ class CometChatService {
         message: "CometChat UI Kit initialized successfully" 
       };
     } catch (error: any) {
-      console.error("❌ CometChat UI Kit initialization failed:", error);
+      console.error("CometChatService.initialize: ERROR during CometChatUIKit.init():", error);
+      console.error("CometChatService.initialize: Error code:", error?.code);
+      console.error("CometChatService.initialize: Error message:", error?.message);
+      // console.error("CometChatService.initialize: Full error object:", JSON.stringify(error, null, 2)); // Can be too verbose
       
       const appError: AppError = {
         code: error?.code || "INIT_ERROR",

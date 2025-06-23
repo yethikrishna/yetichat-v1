@@ -22,18 +22,23 @@ export const useAuth = () => {
         // Subscribe to auth state changes
         unsubscribe = AuthService.subscribe(setAuthState);
         
-        // Initialize auth service
+        console.log("useAuth: Attempting AuthService.initialize()");
         await AuthService.initialize();
+        console.log("useAuth: AuthService.initialize() completed.");
         
-        // Get initial auth state
+        console.log("useAuth: Attempting AuthService.getCurrentAuthState()");
         const initialState = await AuthService.getCurrentAuthState();
+        console.log("useAuth: AuthService.getCurrentAuthState() completed.", initialState);
+
         setAuthState(initialState);
       } catch (error: any) {
-        console.error('Failed to initialize auth:', error);
+        console.error('useAuth: CRITICAL ERROR during initAuth:', error); // Unique error message
+        console.error('useAuth: Error message:', error?.message);
+        console.error('useAuth: Error stack:', error?.stack);
         setAuthState(prev => ({
           ...prev,
           isLoading: false,
-          error: error?.message || 'Failed to initialize authentication'
+          error: error?.message || 'Critical error during authentication initialization'
         }));
       }
     };

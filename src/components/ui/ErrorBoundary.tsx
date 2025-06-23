@@ -77,18 +77,20 @@ const DefaultErrorFallback: React.FC<{ error: Error; resetError: () => void }> =
         <p className="text-sm text-gray-500 mb-4">
           An unexpected error occurred in the application. This has been logged and we're working to fix it.
         </p>
-        
-        {process.env.NODE_ENV === 'development' && (
-          <details className="mt-4 text-left">
-            <summary className="text-sm font-medium text-gray-700 cursor-pointer">
-              Error Details (Development)
-            </summary>
-            <pre className="mt-2 text-xs text-red-600 bg-red-50 p-2 rounded overflow-auto max-h-32">
-              {error.message}
-              {error.stack && `\n\n${error.stack}`}
-            </pre>
-          </details>
-        )}
+
+        {/* Temporary change for debugging: Always show error details */}
+        <details className="mt-4 text-left" open> {/* Add 'open' attribute to have it expanded by default */}
+          <summary className="text-sm font-medium text-gray-700 cursor-pointer">
+            Error Details
+          </summary>
+          <pre className="mt-2 text-xs text-red-600 bg-red-50 p-2 rounded overflow-auto max-h-60"> {/* Increased max-h */}
+            {error?.message}
+            {error?.stack && `
+
+Stack Trace:
+${error.stack}`}
+          </pre>
+        </details>
         
         <div className="mt-6 flex space-x-3">
           <button
