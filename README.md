@@ -19,6 +19,21 @@ A modern, professional chat application built with **CometChat React UI Kit**. Y
 - ⚡ **High Performance** - Built with Vite for fast development and builds
 - 🔧 **TypeScript Support** - Full type safety and better developer experience
 
+## 🚀 Quick Deploy to Netlify
+
+**Ready to deploy?** This repository is fully configured for Netlify deployment!
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/yethikrishna/yetichat-v1)
+
+### What's Included for Netlify:
+- ✅ Optimized `netlify.toml` configuration
+- ✅ SPA routing with proper redirects
+- ✅ Performance optimizations (caching, compression)
+- ✅ Security headers
+- ✅ Chunked builds for faster loading
+
+**📖 Detailed guide:** [NETLIFY_DEPLOY.md](NETLIFY_DEPLOY.md)
+
 ## 🚀 Live Demo
 
 Experience Yetichat in action: [**Live Demo**](https://msu7m21i7f.space.minimax.io)

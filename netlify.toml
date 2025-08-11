@@ -3,8 +3,11 @@
   publish = "dist"
 
 [build.environment]
-  # Ensure pnpm is used by Netlify's build image
-  PNPM_VERSION = "8" # Specify a version or let Netlify use its default
+  # Use specific pnpm version for reproducible builds
+  PNPM_VERSION = "8"
+  # Optimize Node.js for build performance
+  NODE_VERSION = "18"
+  NPM_FLAGS = "--prefer-offline --no-audit"
 
 # Redirects rule for Single Page Applications (SPA)
 # This ensures that all paths are served by index.html
@@ -13,17 +16,47 @@
   to = "/index.html"
   status = 200
 
-# It's good practice to define environment variables in Netlify's UI,
-# but if you need to pass them during build time and they are not sensitive,
-# you can use this section. For sensitive keys, use Netlify's UI.
-# For this project, the .env file should be automatically picked up by Vite during the build.
-# However, Netlify's build environment might not automatically source .env files in the same way a local dev server does.
-# To ensure Vite has access to these, we can explicitly list them here if needed,
-# but a better practice for Netlify is to set them in the Netlify UI.
-# For now, we assume Vite's `import.meta.env` will work as expected with .env file during Netlify build.
-# If not, we might need to adjust by using Netlify build environment variables that get passed to the vite build.
+# Cache static assets for better performance
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
+# Cache main app files with shorter cache for updates
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Security headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https: wss:;"
+
+# Local development configuration
 [dev]
-  command = "pnpm run dev" # Command to run the dev server
-  port = 5173 # Default Vite port, can be adjusted
-  publish = "dist" # Directory to serve locally
+  command = "pnpm run dev"
+  port = 5173
+  publish = "dist"
+
+# Build plugin for optimizations (optional)
+[build.processing]
+  skip_processing = false
+[build.processing.css]
+  bundle = true
+  minify = true
+[build.processing.js]
+  bundle = true
+  minify = true
+[build.processing.html]
+  pretty_urls = true

@@ -19,6 +19,7 @@
     "preview": "pnpm install && vite preview",
     "test:auth": "echo 'Manual auth tests pending. Please run npm run dev and follow test plan.'",
     "verify": "node scripts/verify-repository.js",
+    "validate:netlify": "./scripts/validate-netlify.sh",
     "publish-github": "bash scripts/publish-to-github.sh"
   },
   "dependencies": {
