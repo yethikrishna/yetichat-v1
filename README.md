@@ -6,9 +6,11 @@
 [![CometChat](https://img.shields.io/badge/CometChat-6.0.6-orange)](https://www.cometchat.com/)
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://msu7m21i7f.space.minimax.io)
 
-A modern, professional chat application built with **CometChat React UI Kit**. Yetichat provides real-time messaging, user management, and group conversations with a beautiful, responsive interface.
+A modern, **enterprise-grade** chat application built with **CometChat React UI Kit**. Yetichat provides real-time messaging, user management, and group conversations with a beautiful, accessible, and responsive interface.
 
-## ✨ Features
+> **🎉 NEW:** Now with 10+ enterprise features including dark mode, emoji picker, typing indicators, notifications, and more!
+
+## ✨ Core Features
 
 - 🔐 **Secure Authentication** - User login and session management
 - 💬 **Real-time Messaging** - Instant chat with other users
@@ -18,6 +20,21 @@ A modern, professional chat application built with **CometChat React UI Kit**. Y
 - 🎨 **Modern UI/UX** - Clean, professional interface with Tailwind CSS
 - ⚡ **High Performance** - Built with Vite for fast development and builds
 - 🔧 **TypeScript Support** - Full type safety and better developer experience
+
+## 🚀 Enterprise Features (NEW!)
+
+- 🌙 **Dark Mode** - Beautiful dark theme with system preference support
+- 😊 **Emoji Picker** - 100+ categorized emojis with keyboard navigation
+- 💬 **Typing Indicators** - Real-time typing status with animations
+- 🟢 **Presence Status** - Online, offline, away, and busy indicators
+- 🔔 **Smart Notifications** - Browser notifications with sound alerts
+- 🔍 **Message Search** - Quick search through conversation history
+- 📎 **File Attachments** - Drag & drop file upload with preview
+- ♿ **Full Accessibility** - WCAG 2.1 AA compliant with ARIA support
+- ⚡ **Optimized Performance** - Message virtualization and React.memo
+- 📱 **Read Receipts** - Message status tracking (sent/delivered/read)
+
+> 📖 **[View Complete Feature Documentation](FEATURES.md)**
 
 ## 🚀 Live Demo
 
@@ -172,9 +189,37 @@ See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for more detailed deployment instru
 - Docker deployment
 - Custom server deployment
 
+## 📦 New Component Library
+
+Yetichat now includes a rich component library for building enterprise chat experiences:
+
+### Chat Components
+- **`MessageList`** - Virtualized message list with auto-scroll and infinite loading
+- **`EnhancedMessageInput`** - Advanced input with emoji picker and file attachments
+- **`TypingIndicator`** - Animated typing status indicator
+- **`MessageSearch`** - Real-time message search with keyboard shortcuts
+- **`EmojiPicker`** - Categorized emoji selector with accessibility
+
+### UI Components
+- **`ThemeToggle`** - Dark/light/system theme switcher
+- **`PresenceIndicator`** - User status badge (online/offline/away/busy)
+- **`NotificationManager`** - Notification center with sound alerts
+
+### Demo
+- **`FeaturesShowcase`** - Interactive demo of all enterprise features
+
+See [FEATURES.md](FEATURES.md) for usage examples and detailed documentation.
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+When contributing:
+- Ensure accessibility with ARIA labels and keyboard navigation
+- Add dark mode support to new components
+- Use TypeScript for type safety
+- Follow existing code patterns
+- Include documentation
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
