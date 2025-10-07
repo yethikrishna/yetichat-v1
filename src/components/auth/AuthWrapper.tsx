@@ -13,6 +13,9 @@ interface AuthWrapperProps {
 
 const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
   const { isAuthenticated, isLoading, user } = useAuth();
+  // State for toggling between login and registration - must be at top level
+  const [showRegistration, setShowRegistration] = useState(false);
+  const toggleShowRegistration = () => setShowRegistration(!showRegistration);
 
   // Show loading screen while checking authentication
   if (isLoading) {
@@ -25,10 +28,6 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
       </div>
     );
   }
-
-  // Show login form if not authenticated
-  const [showRegistration, setShowRegistration] = useState(false); // State for toggling
-  const toggleShowRegistration = () => setShowRegistration(!showRegistration);
 
   if (!isAuthenticated || !user) {
     return (
