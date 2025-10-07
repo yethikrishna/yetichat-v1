@@ -5,6 +5,8 @@ import React from 'react';
 import { cn } from '../../lib/utils';
 import { APP_CONSTANTS } from '../../utils/constants';
 import useAuth from '../../hooks/useAuth';
+import ThemeToggle from '../ui/ThemeToggle';
+import NotificationManager from '../ui/NotificationManager';
 
 interface HeaderProps {
   className?: string;
@@ -114,6 +116,12 @@ const Header: React.FC<HeaderProps> = ({
 
           {/* Actions */}
           <div className="flex items-center space-x-2">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
+            {/* Notification Manager */}
+            <NotificationManager soundEnabled={true} maxNotifications={10} />
+
             {/* Settings Button */}
             <button
               className="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"

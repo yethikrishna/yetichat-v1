@@ -110,15 +110,19 @@ export interface UserSettings {
 
 // Global CometChat type declarations
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace CometChat {
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     interface User {
       // Extend CometChat User interface if needed
     }
     
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     interface BaseMessage {
       // Extend CometChat BaseMessage interface if needed
     }
     
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     interface Conversation {
       // Extend CometChat Conversation interface if needed
     }
